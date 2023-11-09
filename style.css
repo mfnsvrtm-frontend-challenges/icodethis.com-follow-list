@@ -1,0 +1,178 @@
+body {
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --clr-bg: hsl(0, 0%, 16%);
+    --clr-accent: hsl(7, 91%, 67%);
+    --clr-light: hsl(0, 0%, 100%);
+    --clr-mid: hsl(0, 0%, 43%);
+
+    --hsl-accent: 7, 91%, 67%;
+    --hsl-light: 0, 0%, 100%;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.person-card :is(.name, .title) {
+    letter-spacing: 0.05em;
+}
+
+.person-card .name {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--clr-light);
+}
+
+.person-card .title {
+    font-weight: 300;
+    font-size: 1.125rem;
+    color: var(--clr-mid);
+}
+
+.person-card button {
+    font-weight: 500;
+    font-size: 0.75rem;
+}
+
+body {
+    min-height: 100vh;
+
+    display: grid;
+    place-items: center;
+
+    background-color: var(--clr-bg)
+}
+
+.card {
+    width: 500px;
+    padding: 30px;
+
+    border-radius: 15px;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 1);
+}
+
+.person-card + .person-card {
+    --spacing: 30px;
+
+    margin-top: var(--spacing);
+    padding-top: var(--spacing);
+    border-top: 1px solid var(--clr-mid);
+}
+
+.person-card {
+    box-sizing: content-box;
+
+    display: grid;
+    grid-template-areas:
+        "avatar name name"
+        "avatar title title"
+        "avatar message follow";
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: repeat(3, 1fr);
+
+    height: 130px;
+}
+
+.person-card > .avatar { grid-area: avatar; }
+.person-card > .name { grid-area: name; }
+.person-card > .title { grid-area: title; }
+.person-card > .message { grid-area: message; }
+.person-card > .follow { grid-area: follow; }
+
+.person-card :is(.name, .title) {
+    margin: 0;
+}
+
+.person-card .avatar {
+    --pattern-size: 80px;
+
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    margin: 5px;
+    margin-right: 20px;
+
+    border-radius: 15px;
+    overflow: hidden;
+
+    background:
+        linear-gradient(135deg, var(--clr-bg) 25%, transparent 25%) calc(-0.5*var(--pattern-size)) 0,
+        linear-gradient(225deg, var(--clr-bg) 25%, transparent 25%) calc(-0.5*var(--pattern-size)) 0,
+        linear-gradient(315deg, var(--clr-bg) 25%, transparent 25%),
+        linear-gradient(45deg, var(--clr-bg) 25%, transparent 25%);
+    background-size: var(--pattern-size) var(--pattern-size);
+    background-color: hsla(var(--hsl-light), 0.15)
+}
+
+.person-card .avatar::before {
+    --border-width: 7px;
+
+    position: absolute;
+    top: calc(-0.5*var(--border-width));
+    left: calc(-0.5*var(--border-width));
+
+    content: '';
+    display: block;
+    width: 15px;
+    aspect-ratio: 1 / 1;
+
+    border-radius: 100vh;
+    border: var(--border-width) solid var(--clr-bg);
+
+    background-color: var(--dot-color);
+}
+
+.person-card .avatar img {
+    height: 90%;
+}
+
+.person-card .title {
+    margin-top: 0.25em;
+}
+
+.person-card button {
+    --spacing: 5px;
+    --radius: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.375em;
+    
+    padding: 0.5em 1.25em;
+
+    border: 2px solid var(--clr-accent);
+    background-color: transparent;
+
+    cursor: pointer;
+}
+
+.person-card button i {
+    font-size: 1.75em;
+    margin-left: -0.125em;
+}
+
+.person-card .message {
+    margin-right: var(--spacing);
+    border-radius: var(--radius) 0 0 var(--radius);
+
+    color: var(--clr-light);
+}
+
+.person-card .follow {
+    margin-left: var(--spacing);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    
+    background-color: var(--clr-accent);
+    color: var(--clr-bg);
+}
